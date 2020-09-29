@@ -86,6 +86,8 @@ public final class GaussMethodDoubleImpl {
             bVector[i] = bVector[i] - bVector[rowNum] * multiplier;
         }
         /* Utils.outPut(aMatrix, bVector);*/
+       
+       
     }
 
     public void setZerosUp(int rowNum, int colNum) {
