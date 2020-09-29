@@ -38,8 +38,8 @@ public class Utils {
         System.out.println(info);
         for (double element : vector) {
             /*System.out.println(df.format(element));*/
-            System.out.printf("│\t%.20f\t│", element);
-            System.out.println();
+            System.out.printf("│\t%.20f\t│\n", element);
+            /*System.out.println(element);*/
         }
         System.out.println();
     }

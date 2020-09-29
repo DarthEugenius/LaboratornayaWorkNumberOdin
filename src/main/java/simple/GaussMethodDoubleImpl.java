@@ -7,6 +7,7 @@ import utils.Utils;
 @AllArgsConstructor
 @Data
 
+
 public final class GaussMethodDoubleImpl {
     private double[][] aMatrix;
     private double[] bVector;
@@ -20,6 +21,12 @@ public final class GaussMethodDoubleImpl {
         }
     }
 
+
+    /**
+     * @return решение СЛАУ
+     * aMatrix.length - число уравнений (строк матрицы)
+     * exceptionsChecking() - проверка корректности введённой СЛАУ
+     */
     public double[] solve() {
         exceptionsChecking();
 
@@ -40,6 +47,10 @@ public final class GaussMethodDoubleImpl {
         return bVector;
     }
 
+    /**
+     * @return номер строки с максимальным (по модулю) элементом в заданном столбце
+     * @param column - заданный столбец
+     */
     public int findRowWithMaxFirstElement(int column) {
         if (column == bVector.length) {
             return column;
@@ -50,12 +61,13 @@ public final class GaussMethodDoubleImpl {
         }
         return maxIndex;
     }
-
+    /**
+     * Деление строки под номером rowNum начиная с элемента номер colNum на число number
+     */
     private void divideAllRowElementsByNumber(int rowNum, int colNum, double number) {
         for (int i = colNum; i < aMatrix.length; i++) {
             aMatrix[rowNum][i] = aMatrix[rowNum][i] / number;
         }
-        //работаем с bVector
         bVector[rowNum] = bVector[rowNum] / number;
     }
 
@@ -72,7 +84,7 @@ public final class GaussMethodDoubleImpl {
             //работаем с bVector
             bVector[i] = bVector[i] - bVector[rowNum] * multiplier;
         }
-        Utils.outPut(aMatrix, bVector);
+       /* Utils.outPut(aMatrix, bVector);*/
     }
 
     public void setZerosUp(int rowNum, int colNum) {
@@ -85,7 +97,7 @@ public final class GaussMethodDoubleImpl {
             bVector[i - 1] = bVector[i - 1] - bVector[rowNum] * alpha;
         }
         //TODO
-        Utils.outPut(aMatrix, bVector);
+        /*Utils.outPut(aMatrix, bVector);*/
     }
 
     public void swapRows(int currentIndex, int maxIndex) {
