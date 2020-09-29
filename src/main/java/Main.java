@@ -2,11 +2,6 @@ import simple.GaussMethodDoubleImpl;
 import simple.ThomasMethodDoubleImpl;
 import utils.Utils;
 
-/**
- * @GaussMethodDoubleImpl -
- */
-
-
 public class Main {
     public static void main(String[] args) {
         double[][] aMatrix = new double[][]{
@@ -31,6 +26,8 @@ public class Main {
         /*bVector = Matrix.multiplyByMatrix(aMatrix, xVector);*/
         GaussMethodDoubleImpl solver1 = new GaussMethodDoubleImpl(aMatrix, bVector);
         ThomasMethodDoubleImpl solver2 = new ThomasMethodDoubleImpl(aMatrix, bVector);
+
+
         Utils.outPut(solver2.solve());
 
     }

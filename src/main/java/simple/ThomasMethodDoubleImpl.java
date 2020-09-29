@@ -17,8 +17,6 @@ public class ThomasMethodDoubleImpl {
         this.aArray = aArrayCreate();
         this.bArray = bArrayCreate();
         this.cArray = cArrayCreate();
-        /*this.pArray = pArrayCreate();
-        this.qArray = qArrayCreate();*/
         this.xVector = new double[aMatrix.length];
     }
 

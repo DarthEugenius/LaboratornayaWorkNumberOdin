@@ -24,8 +24,8 @@ public final class GaussMethodDoubleImpl {
 
     /**
      * @return решение СЛАУ
-     * aMatrix.length - число уравнений (строк матрицы)
-     * exceptionsChecking() - проверка корректности введённой СЛАУ
+     * aMatrix.length - число строк матрицы
+     * exceptionsChecking() - проверка корректности введённой СЛАУ (типа вдруг она не квадратная вообще)
      */
     public double[] solve() {
         exceptionsChecking();
@@ -36,20 +36,20 @@ public final class GaussMethodDoubleImpl {
             divideAllRowElementsByNumber(i, i, aMatrix[i][i]);
             setZeroesUnder(i, i);
         }
-        /*//TODO
+        /* DEBUG
         Utils.outPut(aMatrix, bVector);*/
 
-        for (int i = bVector.length-1; i >= 0; i--) {
+        for (int i = bVector.length - 1; i >= 0; i--) {
             setZerosUp(i, i);
         }
-        /*//TODO
+        /*//DEBUG
         Utils.outPut(aMatrix, bVector);*/
         return bVector;
     }
 
     /**
-     * @return номер строки с максимальным (по модулю) элементом в заданном столбце
      * @param column - заданный столбец
+     * @return номер строки с максимальным (по модулю) элементом в заданном столбце
      */
     public int findRowWithMaxFirstElement(int column) {
         if (column == bVector.length) {
@@ -61,6 +61,7 @@ public final class GaussMethodDoubleImpl {
         }
         return maxIndex;
     }
+
     /**
      * Деление строки под номером rowNum начиная с элемента номер colNum на число number
      */
@@ -84,7 +85,7 @@ public final class GaussMethodDoubleImpl {
             //работаем с bVector
             bVector[i] = bVector[i] - bVector[rowNum] * multiplier;
         }
-       /* Utils.outPut(aMatrix, bVector);*/
+        /* Utils.outPut(aMatrix, bVector);*/
     }
 
     public void setZerosUp(int rowNum, int colNum) {
@@ -96,7 +97,7 @@ public final class GaussMethodDoubleImpl {
             }
             bVector[i - 1] = bVector[i - 1] - bVector[rowNum] * alpha;
         }
-        //TODO
+        //DEBUG
         /*Utils.outPut(aMatrix, bVector);*/
     }
 
