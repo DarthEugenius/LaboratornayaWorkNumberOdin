@@ -2,7 +2,6 @@ package simple;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import utils.Utils;
 
 @AllArgsConstructor
 @Data
