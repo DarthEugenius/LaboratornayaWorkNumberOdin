@@ -2,6 +2,7 @@ package utils.Builders;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import utils.Utils;
 
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -55,7 +56,7 @@ public class MatrixBuilder {
 
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
-                matrix[i][j] = matrix[i][j]/maxElement;
+                matrix[i][j] = matrix[i][j] / maxElement;
             }
         }
 
@@ -63,6 +64,18 @@ public class MatrixBuilder {
         return matrix;
     }
 
+    public double[][] buildRandomlyGeneratedTripleDiagMatrix() {
+        double[][] matrix = new double[columns][rows];
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
+                if (i == j || i == j - 1 || i == j + 1) {
+                    matrix[i][j] = ThreadLocalRandom.current().nextDouble(-10, 10);
+                }
+            }
+        }
+        Utils.outPut(matrix, "DEBUG");
+        return matrix;
+    }
 
 
 }

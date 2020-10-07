@@ -7,11 +7,10 @@ public class ThomasMethodDoubleImpl {
     private final double[] aArray;
     private final double[] bArray;
     private final double[] cArray;
-    /*  private final double[] pArray;
-      private final double[] qArray;*/
+
     private final double[] xVector;
 
-    public ThomasMethodDoubleImpl(double[][] aMatrix, double[] bVector) {
+    public ThomasMethodDoubleImpl(final double[][] aMatrix, final double[] bVector) {
         this.aMatrix = aMatrix;
         this.bVector = bVector;
         this.aArray = aArrayCreate();

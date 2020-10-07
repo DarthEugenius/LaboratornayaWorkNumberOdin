@@ -1,15 +1,16 @@
 package simple;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
 
-@AllArgsConstructor
-@Data
 
 
 public final class GaussMethodDoubleImpl {
-    private double[][] aMatrix;
-    private double[] bVector;
+    private final double[][] aMatrix;
+    private final double[] bVector;
+
+    public GaussMethodDoubleImpl(double[][] aMatrix, double[] bVector) {
+        this.aMatrix = aMatrix.clone();
+        this.bVector = bVector.clone();
+    }
 
     private void exceptionsChecking() {
         if (aMatrix.length != bVector.length) {
