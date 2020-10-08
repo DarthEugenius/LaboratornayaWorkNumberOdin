@@ -1,12 +1,19 @@
 package simple;
 
 
-
-
+/**
+ *
+ */
 public final class GaussMethodDoubleImpl {
     private final double[][] aMatrix;
     private final double[] bVector;
 
+
+    /**
+     *
+     * @param aMatrix квадратная матрица системы
+     * @param bVector столбец свободных членов
+     */
     public GaussMethodDoubleImpl(double[][] aMatrix, double[] bVector) {
         this.aMatrix = aMatrix.clone();
         this.bVector = bVector.clone();
@@ -25,10 +32,12 @@ public final class GaussMethodDoubleImpl {
     /**
      * @return решение СЛАУ
      * aMatrix.length - число строк матрицы
-     * exceptionsChecking() - проверка корректности введённой СЛАУ (типа вдруг она не квадратная вообще)
      */
     public double[] solve() {
         exceptionsChecking();
+
+        /* DEBUG
+        Utils.outPut(aMatrix, bVector);*/
 
         // Прямой ход
         for (int i = 0; i < bVector.length; i++) {
@@ -42,8 +51,7 @@ public final class GaussMethodDoubleImpl {
         for (int i = bVector.length - 1; i >= 0; i--) {
             setZerosUp(i, i);
         }
-        /*//DEBUG
-        Utils.outPut(aMatrix, bVector);*/
+
         return bVector;
     }
 
@@ -111,5 +119,6 @@ public final class GaussMethodDoubleImpl {
         aMatrix[maxIndex] = tempA;
         bVector[maxIndex] = tempB;
     }
+
 
 }

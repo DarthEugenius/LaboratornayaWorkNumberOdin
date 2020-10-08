@@ -4,10 +4,48 @@ import simple.ThomasMethodDoubleImpl;
 import utils.Builders.MatrixBuilder;
 import utils.Builders.VectorBuilder;
 import utils.Utils;
+import utils.Matrix.Matrix;
+
+
+import static utils.Matrix.Matrix.subtractVectors;
 
 public class Main {
     public static void main(String[] args) {
-        double[][] testMatrix = new double[][]{
+
+        int n = 10;
+        double[] xVector = VectorBuilder.buildRandomlyGeneratedVectorOfDoubles(n, -10, 10);
+
+        double[][] aMatrixForGaussMethod = MatrixBuilder.buildRandomlyGeneratedMatrix(n, n);
+        double[][] aMatrixForThomasMethod = MatrixBuilder.buildRandomlyGeneratedTripleDiagMatrix(n, n);
+        double[][] aMatrixForSimpleIterationsMethod = MatrixBuilder.buildRandomlyGeneratedMatrixWithBiggerDiagElems(n, n);
+
+        double[] bVectorForGaussMethod = Matrix.multiplyByMatrix(aMatrixForGaussMethod, xVector);
+        double[] bVectorForThomasMethod = Matrix.multiplyByMatrix(aMatrixForThomasMethod, xVector);
+        double[] bVectorForSimpleIterationsMethod = Matrix.multiplyByMatrix(aMatrixForSimpleIterationsMethod, xVector);
+
+        GaussMethodDoubleImpl gaussMethodDouble = new GaussMethodDoubleImpl(aMatrixForGaussMethod, bVectorForGaussMethod);
+        ThomasMethodDoubleImpl thomasMethodDouble = new ThomasMethodDoubleImpl(aMatrixForThomasMethod, bVectorForThomasMethod);
+        SimpleIterationDoubleImpl simpleIterationDouble = new SimpleIterationDoubleImpl(aMatrixForSimpleIterationsMethod, bVectorForSimpleIterationsMethod, 0.0000000000001);
+
+        double[] xVectorGaussMethod = gaussMethodDouble.solve();
+        double[] xVectorThomasMethod = thomasMethodDouble.solve();
+        double[] xVectorSimpleIterationsMethod = simpleIterationDouble.solve();
+
+        Utils.outPut(xVectorGaussMethod, "Решение методом Гаусса");
+        Utils.outPut(subtractVectors(xVectorGaussMethod, xVector), "Погрешность решения методом Гаусса");
+
+        Utils.outPut(xVectorThomasMethod, "Решение методом прогонки");
+        Utils.outPut(subtractVectors(xVectorThomasMethod, xVector), "Погрешность решения методом прогонки");
+
+        Utils.outPut(xVectorSimpleIterationsMethod, "Решение методом простых итераций");
+        Utils.outPut(subtractVectors(xVectorSimpleIterationsMethod, xVector), "Погрешность решения методом простых итераций");
+
+
+
+    }
+}
+
+/*double[][] testMatrix = new double[][]{
                 {
                         2.0, -1.0, 0.0, 0.0, 0.0
                 },
@@ -23,19 +61,4 @@ public class Main {
                 {
                         0.0, 0.0, 0.0, -5.0, 10.0
                 }
-        };
-
-        double[] bVector = new double[]{-25.0, 72.0, -69.0, -156.0, 20};
-        int n = 10;
-        /*double[][] aMatrix = MatrixBuilder.builder().columns(n).rows(n).build().buildRandomlyGeneratedMatrixWithBiggerDiagElemsOfDoubles();*/
-       /* double[] bVector = VectorBuilder.builder().rows(n).build().buildRandomlyGeneratedVectorOfDoubles(0, 1);*/
-        Utils.outPut(testMatrix, bVector);
-        SimpleIterationDoubleImpl solver3 = new SimpleIterationDoubleImpl(MatrixBuilder.builder().columns(n).rows(n).build().buildRandomlyGeneratedMatrixWithBiggerDiagElemsOfDoubles(), VectorBuilder.builder().rows(n).build().buildRandomlyGeneratedVectorOfDoubles(0, 1), 0.001);
-       /* double[][] testMatrix = MatrixBuilder.builder().rows(n).columns(n).build().buildRandomlyGeneratedTripleDiagMatrix();*/
-        ThomasMethodDoubleImpl solver2 = new ThomasMethodDoubleImpl(testMatrix, bVector);
-        GaussMethodDoubleImpl solver1 = new GaussMethodDoubleImpl(testMatrix, bVector);
-        Utils.outPut(solver1.solve(), "Gauss");
-        Utils.outPut(solver3.solve(), "Thomas huyomas");
-
-    }
-}
+        };*/

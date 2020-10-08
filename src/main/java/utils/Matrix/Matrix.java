@@ -49,6 +49,8 @@ public class Matrix {
     }
 
 
+
+
     public static double[] subtractVectors(double[] v2, double[] v1) {
         for (int i = 0; i < v2.length; i++) {
             v2[i] = v2[i] - v1[i];

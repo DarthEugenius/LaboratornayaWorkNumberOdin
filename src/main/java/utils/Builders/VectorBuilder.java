@@ -1,40 +1,34 @@
 package utils.Builders;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+import java.util.concurrent.ThreadLocalRandom;
+
 
 import java.util.concurrent.ThreadLocalRandom;
 
-@AllArgsConstructor
-@Builder
-public class VectorBuilder {
-    private final int rows;
+public final class VectorBuilder {
 
-    public double[] buildRandomlyGeneratedVectorOfDoubles(double lowerBound, double upperBound) {
-        double[] matrix = new double[rows];
-        for (int i = 0; i < rows; i++) {
+    private VectorBuilder() {
+        throw new AssertionError("VectorBuilder is an util class");
+    }
+
+    public static double[] buildRandomlyGeneratedVectorOfDoubles(int numberOfRows, double lowerBound, double upperBound) {
+        double[] matrix = new double[numberOfRows];
+
+        for (int i = 0; i < numberOfRows; i++) {
 
             matrix[i] = ThreadLocalRandom.current().nextDouble(lowerBound, upperBound);
         }
+
         return matrix;
     }
 
-    public double[] buildRandomlyGeneratedVectorOfDoubles() {
-        return buildRandomlyGeneratedVectorOfDoubles(-10.0, 10.0);
-    }
-    public double[] buildVectorOfZeros()
-    {
-        double[] vector = new double[rows];
-        for (int i = 0; i < rows; i++) {
+    public static double[] buildVectorOfZeros(int numberOfRows) {
+        double[] vector = new double[numberOfRows];
+
+        for (int i = 0; i < numberOfRows; i++) {
             vector[i] = 0;
         }
+
         return vector;
     }
-
-
-
-
-
-
-
 }

@@ -28,12 +28,16 @@ public class ThomasMethodDoubleImpl {
      * bVector - правая часть (столбец)
      */
     public double[] solve() {
+        /* DEBUG
+        Utils.outPut(aMatrix, bVector);*/
+        double alpha;
 
-        double m;
+
+        // Зануляем cArray
         for (int i = 1; i < aMatrix.length; i++) {
-            m = cArray[i - 1] / aArray[i - 1];
-            aArray[i] = aArray[i] - m * bArray[i - 1];
-            bVector[i] = bVector[i] - m * bVector[i - 1];
+            alpha = cArray[i - 1] / aArray[i - 1];
+            aArray[i] = aArray[i] - alpha * bArray[i - 1];
+            bVector[i] = bVector[i] - alpha * bVector[i - 1];
         }
 
         xVector[aMatrix.length - 1] = bVector[aMatrix.length - 1] / aArray[aMatrix.length - 1];
@@ -76,5 +80,6 @@ public class ThomasMethodDoubleImpl {
             throw new IllegalArgumentException("A matrix should be of a square");
         }
     }
+
 
 }

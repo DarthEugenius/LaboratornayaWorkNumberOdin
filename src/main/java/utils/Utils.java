@@ -1,9 +1,10 @@
 package utils;
 
+import java.io.Serializable;
 import java.text.DecimalFormat;
 
 public class Utils {
-    private static final DecimalFormat df = new DecimalFormat("####.##################");
+
     public static void outPut(double[][] A, String info) {
         System.out.println(info);
         for (double[] row : A) {
@@ -43,6 +44,7 @@ public class Utils {
         }
         System.out.println();
     }
+
     public static void outPut(double[] vector) {
         outPut(vector, "");
     }
@@ -56,6 +58,7 @@ public class Utils {
         System.out.println();
     }
 
+
     public static void outPut(int[] vector) {
         outPut(vector, "");
     }
@@ -66,7 +69,7 @@ public class Utils {
             for (double element : row) {
                 System.out.printf("│\t%f\t│", element);
             }
-            System.out.printf("|\t%f\t|", vector[i]);
+            System.out.printf("│\t%f\t│", vector[i]);
             i++;
             System.out.println();
         }
@@ -85,7 +88,6 @@ public class Utils {
         }
         System.out.println();
     }
-
 
 
 }
