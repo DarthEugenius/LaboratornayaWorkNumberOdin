@@ -47,6 +47,7 @@ public class SimpleIterationDoubleImpl {
                 // 1ое приближение - столбец свободных членов
                 currentVariableValues[i] = bVector[i];
 
+                // приведение системы к нормальному виду
                 for (int j = 0; j < size; j++) {
                     if (i != j) {
                         currentVariableValues[i] -= aMatrix[i][j] * previousVariableValues[j];

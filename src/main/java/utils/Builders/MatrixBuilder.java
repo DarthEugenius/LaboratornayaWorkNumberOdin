@@ -3,7 +3,6 @@ package utils.Builders;
 
 
 import utils.InputUtils;
-import utils.Utils;
 
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -39,7 +38,7 @@ public class MatrixBuilder {
         return buildRandomlyGeneratedMatrix(rows, columns, -10, 10);
     }
 
-    public static double[][] buildRandomlyGeneratedMatrixWithBiggerDiagElems(int rows, int columns) {
+    public static double[][] buildrandomlygeneratedmatrixwithbiggerdiagelems(int rows, int columns) {
         double[][] matrix = new double[rows][columns];
         double maxElement = 0;
         for (int i = 0; i < rows; i++) {

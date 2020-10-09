@@ -48,6 +48,8 @@ public final class GaussMethodDoubleImpl {
         /* DEBUG
         Utils.outPut(aMatrix, bVector);*/
 
+
+        // обратный ход
         for (int i = bVector.length - 1; i >= 0; i--) {
             setZerosUp(i, i);
         }

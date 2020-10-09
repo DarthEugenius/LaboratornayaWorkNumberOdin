@@ -39,7 +39,7 @@ public class Utils {
         System.out.println(info);
         for (double element : vector) {
             /*System.out.println(df.format(element));*/
-            System.out.printf("│\t%.20f\t│\n", element);
+            System.out.printf("│\t%.30f\t│\n", element);
             /*System.out.println(element);*/
         }
         System.out.println();
@@ -63,18 +63,25 @@ public class Utils {
         outPut(vector, "");
     }
 
-    public static void outPut(double[][] matrix, double[] vector) {
+    public static void outPut(double[][] matrix, double[] vector, String info) {
+        System.out.println(info);
         int i = 0;
         for (double[] row : matrix) {
             for (double element : row) {
                 System.out.printf("│\t%f\t│", element);
             }
-            System.out.printf("│\t%f\t│", vector[i]);
+            System.out.printf("    │\t%f\t│", vector[i]);
             i++;
             System.out.println();
         }
         System.out.println();
     }
+
+    public static void outPut(double[][] matrix, double[] vector) {
+
+    }
+
+
 
     public static void outPut(int[][] matrix, int[] vector) {
         int i = 0;

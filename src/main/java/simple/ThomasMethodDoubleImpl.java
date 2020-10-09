@@ -33,11 +33,10 @@ public class ThomasMethodDoubleImpl {
         double alpha;
 
 
-        // Зануляем cArray
         for (int i = 1; i < aMatrix.length; i++) {
-            alpha = cArray[i - 1] / aArray[i - 1];
-            aArray[i] = aArray[i] - alpha * bArray[i - 1];
-            bVector[i] = bVector[i] - alpha * bVector[i - 1];
+            alpha = cArray[i - 1] / (-aArray[i - 1]);
+            aArray[i] += alpha * bArray[i - 1]; // a[i]+c[i]*P[i]
+            bVector[i] += alpha * bVector[i - 1]; // c[i]*Q[i]-d[i]
         }
 
         xVector[aMatrix.length - 1] = bVector[aMatrix.length - 1] / aArray[aMatrix.length - 1];
