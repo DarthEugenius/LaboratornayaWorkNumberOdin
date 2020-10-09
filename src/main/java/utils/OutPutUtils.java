@@ -3,7 +3,7 @@ package utils;
 import java.io.Serializable;
 import java.text.DecimalFormat;
 
-public class Utils {
+public class OutPutUtils {
 
     public static void outPut(double[][] A, String info) {
         System.out.println(info);
@@ -81,8 +81,6 @@ public class Utils {
 
     }
 
-
-
     public static void outPut(int[][] matrix, int[] vector) {
         int i = 0;
         for (int[] row : matrix) {
@@ -95,6 +93,5 @@ public class Utils {
         }
         System.out.println();
     }
-
 
 }

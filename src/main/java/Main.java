@@ -4,7 +4,7 @@ import simple.ThomasMethodDoubleImpl;
 import utils.Builders.MatrixBuilder;
 import utils.Builders.VectorBuilder;
 import utils.InputUtils;
-import utils.Utils;
+import utils.OutPutUtils;
 import utils.Matrix.Matrix;
 
 
@@ -12,7 +12,6 @@ import static utils.Matrix.Matrix.subtractVectors;
 
 public class Main {
     public static void main(String[] args) {
-
 
         System.out.println("Размер системы: ");
         int n = InputUtils.getInt();
@@ -29,7 +28,7 @@ public class Main {
         double[] bVectorForThomasMethod = Matrix.multiplyByMatrix(aMatrixForThomasMethod, xVector);
         double[] bVectorForSimpleIterationsMethod = Matrix.multiplyByMatrix(aMatrixForSimpleIterationsMethod, xVector);
 
-        Utils.outPut(aMatrixForGaussMethod, bVectorForGaussMethod, "Метод Гаусса: ");
+        OutPutUtils.outPut(aMatrixForGaussMethod, bVectorForGaussMethod, "Метод Гаусса: ");
 
         GaussMethodDoubleImpl gaussMethodDouble = new GaussMethodDoubleImpl(aMatrixForGaussMethod, bVectorForGaussMethod);
         ThomasMethodDoubleImpl thomasMethodDouble = new ThomasMethodDoubleImpl(aMatrixForThomasMethod, bVectorForThomasMethod);
@@ -39,17 +38,16 @@ public class Main {
         double[] xVectorThomasMethod = thomasMethodDouble.solve();
         double[] xVectorSimpleIterationsMethod = simpleIterationDouble.solve();
 
+        OutPutUtils.outPut(xVectorGaussMethod, "Решение методом Гаусса");
+        OutPutUtils.outPut(subtractVectors(xVectorGaussMethod, xVector), "Погрешность решения методом Гаусса");
 
-        Utils.outPut(xVectorGaussMethod, "Решение методом Гаусса");
-        Utils.outPut(subtractVectors(xVectorGaussMethod, xVector), "Погрешность решения методом Гаусса");
+        OutPutUtils.outPut(aMatrixForThomasMethod, bVectorForThomasMethod, "Метод прогонки: ");
+        OutPutUtils.outPut(xVectorThomasMethod, "Решение методом прогонки");
+        OutPutUtils.outPut(subtractVectors(xVectorThomasMethod, xVector), "Погрешность решения методом прогонки");
 
-        Utils.outPut(aMatrixForThomasMethod, bVectorForThomasMethod, "Метод прогонки: ");
-        Utils.outPut(xVectorThomasMethod, "Решение методом прогонки");
-        Utils.outPut(subtractVectors(xVectorThomasMethod, xVector), "Погрешность решения методом прогонки");
-
-        Utils.outPut(aMatrixForSimpleIterationsMethod, bVectorForSimpleIterationsMethod, "Метод прогонки: ");
-        Utils.outPut(xVectorSimpleIterationsMethod, "Решение методом простых итераций");
-        Utils.outPut(subtractVectors(xVectorSimpleIterationsMethod, xVector), "Погрешность решения методом простых итераций, epsilon = " + epsilon);
+        OutPutUtils.outPut(aMatrixForSimpleIterationsMethod, bVectorForSimpleIterationsMethod, "Метод прогонки: ");
+        OutPutUtils.outPut(xVectorSimpleIterationsMethod, "Решение методом простых итераций");
+        OutPutUtils.outPut(subtractVectors(xVectorSimpleIterationsMethod, xVector), "Погрешность решения методом простых итераций, epsilon = " + epsilon);
 
     }
 }
