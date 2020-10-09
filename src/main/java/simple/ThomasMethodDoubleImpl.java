@@ -47,6 +47,7 @@ public class ThomasMethodDoubleImpl {
         return xVector;
     }
 
+
     public double[] aArrayCreate() {
         double[] a = new double[aMatrix.length];
         for (int i = 0; i < aMatrix.length; i++) {
