@@ -7,18 +7,20 @@ package simple;
 public final class GaussMethodDoubleImpl {
     private final double[][] aMatrix;
     private final double[] bVector;
-
+    private final boolean choseMaxElements;
 
     /**
-     *
-     * @param aMatrix квадратная матрица системы
-     * @param bVector столбец свободных членов
+     * @param aMatrix          квадратная матрица системы
+     * @param bVector          столбец свободных членов
+     * @param choseMaxElements - выбор главных элементов
      */
-    public GaussMethodDoubleImpl(double[][] aMatrix, double[] bVector) {
+    public GaussMethodDoubleImpl(double[][] aMatrix, double[] bVector, boolean choseMaxElements) {
         this.aMatrix = aMatrix.clone();
         this.bVector = bVector.clone();
+        this.choseMaxElements = choseMaxElements;
     }
 
+    // Проверка корректности исходных данных
     private void exceptionsChecking() {
         if (aMatrix.length != bVector.length) {
             throw new IllegalArgumentException("A matrix and B vector has incompatible types");
@@ -28,32 +30,25 @@ public final class GaussMethodDoubleImpl {
         }
     }
 
-
-    /**
-     * @return решение СЛАУ
-     * aMatrix.length - число строк матрицы
-     */
     public double[] solve() {
         exceptionsChecking();
-
-        /* DEBUG
-        Utils.outPut(aMatrix, bVector);*/
-
         // Прямой ход
-        for (int i = 0; i < bVector.length; i++) {
-            swapRows(i, findRowWithMaxFirstElement(i));
-            divideAllRowElementsByNumber(i, i, aMatrix[i][i]);
-            setZeroesUnder(i, i);
+        if (choseMaxElements) {
+            for (int i = 0; i < bVector.length; i++) {
+                swapRows(i, findRowWithMaxFirstElement(i));
+                divideAllRowElementsByNumber(i, i, aMatrix[i][i]);
+                setZeroesUnder(i, i);
+            }
+        } else {
+            for (int i = 0; i < bVector.length; i++) {
+                divideAllRowElementsByNumber(i, i, aMatrix[i][i]);
+                setZeroesUnder(i, i);
+            }
         }
-        /* DEBUG
-        Utils.outPut(aMatrix, bVector);*/
-
-
         // обратный ход
         for (int i = bVector.length - 1; i >= 0; i--) {
             setZerosUp(i, i);
         }
-
         return bVector;
     }
 
@@ -82,6 +77,7 @@ public final class GaussMethodDoubleImpl {
         bVector[rowNum] = bVector[rowNum] / number;
     }
 
+    // "Зануляет" все элементы матрицы под заданным элементом
     public void setZeroesUnder(int rowNum, int colNum) {
         final int aMatrixLength = aMatrix.length;
         if (rowNum == aMatrixLength) {
@@ -95,11 +91,9 @@ public final class GaussMethodDoubleImpl {
             //работаем с bVector
             bVector[i] = bVector[i] - bVector[rowNum] * multiplier;
         }
-        /* Utils.outPut(aMatrix, bVector);*/
-       
-       
     }
 
+    // "Зануляет" все элементы матрицы над заданным элементом
     public void setZerosUp(int rowNum, int colNum) {
         int matrixLength = aMatrix.length;
         for (int i = rowNum; i > 0; i--) {
@@ -109,10 +103,9 @@ public final class GaussMethodDoubleImpl {
             }
             bVector[i - 1] = bVector[i - 1] - bVector[rowNum] * alpha;
         }
-        //DEBUG
-        /*Utils.outPut(aMatrix, bVector);*/
     }
 
+    // Меняет строки местами
     public void swapRows(int currentIndex, int maxIndex) {
         double[] tempA = aMatrix[currentIndex];
         double tempB = bVector[currentIndex];

@@ -38,7 +38,7 @@ public class MatrixBuilder {
         return buildRandomlyGeneratedMatrix(rows, columns, -10, 10);
     }
 
-    public static double[][] buildrandomlygeneratedmatrixwithbiggerdiagelems(int rows, int columns) {
+    public static double[][] buildRandomlyGeneratedMatrixWithBiggerDiagElems(int rows, int columns) {
         double[][] matrix = new double[rows][columns];
         double maxElement = 0;
         for (int i = 0; i < rows; i++) {
@@ -46,7 +46,7 @@ public class MatrixBuilder {
                 if (i != j) {
                     matrix[i][j] = ThreadLocalRandom.current().nextDouble(0, 1);
                 } else {
-                    matrix[i][j] = ThreadLocalRandom.current().nextDouble(0, 1) + 1000;
+                    matrix[i][j] = ThreadLocalRandom.current().nextDouble(0, 1) + 100000;
                     if (maxElement < matrix[i][j]) maxElement = matrix[i][j];
                 }
             }

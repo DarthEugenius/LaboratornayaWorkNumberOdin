@@ -28,25 +28,19 @@ public class ThomasMethodDoubleImpl {
      * bVector - правая часть (столбец)
      */
     public double[] solve() {
-        /* DEBUG
-        Utils.outPut(aMatrix, bVector);*/
+        exceptionsChecking();
         double alpha;
-
-
         for (int i = 1; i < aMatrix.length; i++) {
             alpha = cArray[i - 1] / (-aArray[i - 1]);
             aArray[i] += alpha * bArray[i - 1]; // -a[i]-c[i]*P[i]
             bVector[i] += alpha * bVector[i - 1]; // c[i]*Q[i]-d[i]
         }
-
         xVector[aMatrix.length - 1] = bVector[aMatrix.length - 1] / aArray[aMatrix.length - 1];
-
         for (int i = aMatrix.length - 2; i >= 0; i--) {
             xVector[i] = (bVector[i] - bArray[i] * xVector[i + 1]) / aArray[i];
         }
         return xVector;
     }
-
 
     public double[] aArrayCreate() {
         double[] a = new double[aMatrix.length];
@@ -72,6 +66,7 @@ public class ThomasMethodDoubleImpl {
         return c;
     }
 
+    // Проверка корректности исходных данных
     private void exceptionsChecking() {
         if (aMatrix.length != bVector.length) {
             throw new IllegalArgumentException("A matrix and B vector has incompatible types");
@@ -80,6 +75,4 @@ public class ThomasMethodDoubleImpl {
             throw new IllegalArgumentException("A matrix should be of a square");
         }
     }
-
-
 }
